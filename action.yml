@@ -1,0 +1,51 @@
+name: 'Automated Backup & Export'
+description: 'Compresses selected project files and uploads them as a backup archive to GitHub Releases or custom cloud storage.'
+author: 'RadwanAlmsora'
+branding:
+  icon: 'save'
+  color: 'gray-dark'
+inputs:
+  paths:
+    description: 'Comma-separated list of files or folders to back up (e.g. .env,config/,dist/)'
+    required: true
+    default: '.'
+  archive-name:
+    description: 'Base name for the output archive (timestamp will be appended)'
+    required: false
+    default: 'backup'
+  upload-to-release:
+    description: 'Upload archive to the current GitHub Release (true/false)'
+    required: false
+    default: 'true'
+  cloud-storage-url:
+    description: 'Custom cloud storage endpoint URL for PUT/POST upload (optional)'
+    required: false
+    default: ''
+  cloud-storage-token:
+    description: 'Secret token for custom cloud storage (optional, passed as Bearer header)'
+    required: false
+    default: ''
+outputs:
+  archive-path:
+    description: 'Absolute path to the created backup archive'
+  archive-size:
+    description: 'Size of the archive in bytes'
+  download-url:
+    description: 'Public URL where the backup can be downloaded'
+runs:
+  using: 'composite'
+  steps:
+    - name: Run backup and export
+      run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
+      env:
+        PATHS: ${{ inputs.paths }}
+        ARCHIVE_NAME: ${{ inputs.archive-name }}
+        UPLOAD_TO_RELEASE: ${{ inputs.upload-to-release }}
+        CLOUD_STORAGE_URL: ${{ inputs.cloud-storage-url }}
+        CLOUD_STORAGE_TOKEN: ${{ inputs.cloud-storage-token }}
+        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_SHA: ${{ github.sha }}
+        GITHUB_RUN_ID: ${{ github.run_id }}
