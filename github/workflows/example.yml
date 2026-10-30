@@ -1,0 +1,20 @@
+name: Example Backup Workflow
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Automated Backup
+        uses: ./ # uses local action for testing
+        with:
+          paths: '.env,config/,dist/,README.md'
+          archive-name: 'project-backup'
+          upload-to-release: 'true'
