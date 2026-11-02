@@ -1,3 +1,13 @@
+## Star History
+
+<a href="https://www.star-history.com/?repos=marketplace%2Factions&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=marketplace/actions&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=marketplace/actions&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=marketplace/actions&type=date&legend=top-left" />
+ </picture>
+</a>
+
 # Automated Backup & Export Action
 
 A GitHub Action that automatically compresses selected project files, folders, or configuration files (such as `.env`) and exports them as a timestamped archive to GitHub Releases or a custom cloud storage endpoint.
